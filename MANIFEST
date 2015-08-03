@@ -2,3 +2,8 @@
 setup.cfg
 setup.py
 src/pylex/__init__.py
+src/pylex/category.py
+src/pylex/lot.py
+src/pylex/route.py
+src/pylex/search.py
+src/pylex/user.py
