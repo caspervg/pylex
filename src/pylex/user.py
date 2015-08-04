@@ -16,7 +16,7 @@ class UserRoute(Route):
         Return the user with given id
         :rtype: dict
         """
-        return self._get_json('user/{}', id)
+        return self._get_json('user/{0}', id)
 
     def all(self, start=0, amount=10):
         """

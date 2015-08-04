@@ -31,7 +31,7 @@ class LotRoute(Route):
         if votes:
             args['votes'] = 'true'
 
-        return self._get_json('lot/{}', id, **args)
+        return self._get_json('lot/{0}', id, **args)
 
     def all(self):
         """
@@ -49,7 +49,7 @@ class LotRoute(Route):
         :param directory: Directory where the downloaded ZIP should be stored
         :return: None
         """
-        url = (self._base + 'lot/{}/download').format(id)
+        url = (self._base + 'lot/{0}/download').format(id)
         r = requests.get(url, auth=self._auth, stream=True)
         file_name = r.headers['Content-Disposition'].split('"')[-2]
 
@@ -68,7 +68,7 @@ class LotRoute(Route):
         :param id: Identifier of the lot to add to the list
         :return: None
         """
-        self._get('lot/{}/download-list', id)
+        self._get('lot/{0}/download-list', id)
 
     def rate(self, id, comment=None, vote=None):
         """
@@ -89,7 +89,7 @@ class LotRoute(Route):
             if len(comment) > 0:
                 rating['comment'] = comment
 
-        url = self._base + 'lot/{}/comment'.format(id)
+        url = self._base + 'lot/{0}/comment'.format(id)
         r = requests.post(url, auth=self._auth, params=rating)
         r.raise_for_status()
         return r.json()
