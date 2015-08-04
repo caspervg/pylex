@@ -1,4 +1,4 @@
-from nose.tools import eq_, ok_
+from nose.tools import eq_, ok_, raises
 import requests_mock
 
 from src.pylex import LexApi
@@ -87,3 +87,23 @@ def test_search():
         eq_(res[0]['name'], 'BLS Farm - Porkies')
         eq_(res[1]['version'], '1.0')
         eq_(res[1]['is_certified'], True)
+
+
+@raises(Exception)
+def test_bad_search_1():
+    _api.search_route().search()
+
+
+@raises(Exception)
+def test_bad_search_2():
+    _api.search_route().search(start=10, amount=5, order='desc')
+
+
+@raises(Exception)
+def test_bad_search_3():
+    _api.search_route().search(filters={})
+
+
+@raises(Exception)
+def test_bad_search_4():
+    _api.search_route().search(start=10, amount=5, order='desc', filters={})
