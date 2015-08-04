@@ -13,7 +13,6 @@ class LotRoute(Route):
         return self._get_json('lot/all')
 
     def download(self, id, file_path):
-
         url = (self._base + 'lot/{}/download').format(id)
         r = requests.get(url, auth=self._auth, stream=True)
         file_name = r.headers['Content-Disposition'].split('"')[-2]
