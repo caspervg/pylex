@@ -1,7 +1,7 @@
 from nose.tools import eq_, ok_, raises
 import requests_mock
 
-from src.pylex import LexApi
+from .. import LexApi
 
 _api = LexApi(auth=('test_account', 'test_pass'))
 _base = 'http://sc4devotion.com/csxlex/api/v4'

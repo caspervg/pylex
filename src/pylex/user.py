@@ -1,5 +1,5 @@
 import requests
-from src.pylex.route import Route
+from .route import Route
 
 
 class UserRoute(Route):

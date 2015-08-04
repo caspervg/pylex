@@ -1,8 +1,7 @@
-import json
 from nose.tools import ok_, eq_
 import requests_mock
 
-from src.pylex import LexApi
+from .. import LexApi
 
 _api = LexApi(auth=('caspervg', 'lolcode'))
 _base = 'http://sc4devotion.com/csxlex/api/v4'

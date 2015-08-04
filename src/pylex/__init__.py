@@ -1,7 +1,7 @@
-from src.pylex.category import CategoryRoute
-from src.pylex.lot import LotRoute
-from src.pylex.search import SearchRoute
-from src.pylex.user import UserRoute
+from .category import CategoryRoute
+from .lot import LotRoute
+from .search import SearchRoute
+from .user import UserRoute
 
 class LexApi(object):
 

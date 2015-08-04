@@ -1,10 +1,13 @@
 import os
 import requests
 
-from src.pylex.route import Route
+from .route import Route
 
 
 class LotRoute(Route):
+    """
+    Contains endpoints related to LEX lots
+    """
 
     def lot(self, id, user=True, dependencies=True, comments=True, votes=True):
         """
