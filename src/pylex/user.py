@@ -18,7 +18,7 @@ class UserRoute(Route):
         """
         return self._get_json('user/{}', id)
 
-    def all_user(self, start=0, amount=10):
+    def all(self, start=0, amount=10):
         """
         Return a list of all users
         :rtype: list

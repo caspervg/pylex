@@ -33,7 +33,7 @@ def test_all_user():
         mock.register_uri('GET', _base + '/user/all', text="""[ { "id":11, "username":"account11" },
          { "id":12, "username":"account12" }, { "id":13, "username":"account13" } ]""")
 
-        users = _api.user_route().all_user()
+        users = _api.user_route().all()
         eq_(users[0]['username'], 'account11')
         eq_(len(users), 3)
 
