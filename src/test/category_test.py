@@ -75,7 +75,7 @@ def test_groups():
         eq_(len(cats), 4)
         eq_(cats[0]['name'], 'BSC - VIP girafe flora')
 
-def test_groups():
+def test_authors():
     with requests_mock.Mocker() as mock:
         mock.register_uri('GET', _base + '/category/group', text="""[ { "id":4, "name":"BSC - VIP girafe flora",
          "author":"girafe" },{ "id":2, "name":"CAL Canals", "author":"callagrafx" },
