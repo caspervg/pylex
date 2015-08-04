@@ -19,6 +19,7 @@ class LexApi(object):
                  user_route=UserRoute(),
                  search_route=SearchRoute(),
                  category_route=CategoryRoute()):
+
         self._routes['lot'] = lot_route
         self._routes['user'] = user_route
         self._routes['search'] = search_route
