@@ -6,6 +6,7 @@ from src.pylex import LexApi
 _api = LexApi(auth=('test_account', 'test_pass'))
 _base = 'http://sc4devotion.com/csxlex/api/v4'
 
+
 def test_me():
     with requests_mock.Mocker() as mock:
         mock.register_uri('GET', _base + '/user', text="""{ "id":1, "fullname":"Test McTester",
@@ -36,6 +37,7 @@ def test_all_user():
         eq_(users[0]['username'], 'account11')
         eq_(len(users), 3)
 
+
 def test_dl_history():
     with requests_mock.Mocker() as mock:
         mock.register_uri('GET', _base + '/user/download-history', text="""[ { "record": { "id": 13147804,
@@ -65,11 +67,13 @@ def test_dl_list():
         eq_(lis[0]['record']['id'], 13099621)
         eq_(lis[0]['lot']['name'], 'JRJ Props Vol4 Rural Walls')
 
+
 def test_register():
     with requests_mock.Mocker() as mock:
         mock.register_uri('POST', _base + '/user/register?username=user')
 
         _api.user_route().register('user', 'pass', 'me@example.com', 'Test User')
+
 
 def test_activate():
     with requests_mock.Mocker() as mock:

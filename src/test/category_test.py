@@ -6,6 +6,7 @@ from src.pylex import LexApi
 _api = LexApi(auth=('test_account', 'test_pass'))
 _base = 'http://sc4devotion.com/csxlex/api/v4'
 
+
 def test_categories():
     with requests_mock.Mocker() as mock:
         mock.register_uri('GET', _base + '/category/all', text="""{ "broad_category":[ { "id":1, "name":"Agriculture",
@@ -31,6 +32,7 @@ def test_categories():
         eq_(cats['group'][0]['author'], 'girafe')
         eq_(cats['author'][0]['name'], 'ADMIN')
 
+
 def test_broad():
     with requests_mock.Mocker() as mock:
         mock.register_uri('GET', _base + '/category/broad-category', text="""[ { "id":1, "name":"Agriculture",
@@ -54,6 +56,7 @@ def test_lex_types():
         eq_(len(cats), 4)
         eq_(cats[-1]['id'], 7)
 
+
 def test_lex_categories():
     with requests_mock.Mocker() as mock:
         mock.register_uri('GET', _base + '/category/lex-category', text="""[ { "id":66,
@@ -63,6 +66,7 @@ def test_lex_categories():
         cats = _api.category_route().lex_categories()
         eq_(len(cats), 4)
         eq_(cats[1]['name'], '00 Outdated')
+
 
 def test_groups():
     with requests_mock.Mocker() as mock:
@@ -74,6 +78,7 @@ def test_groups():
         cats = _api.category_route().groups()
         eq_(len(cats), 4)
         eq_(cats[0]['name'], 'BSC - VIP girafe flora')
+
 
 def test_authors():
     with requests_mock.Mocker() as mock:

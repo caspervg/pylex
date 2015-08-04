@@ -65,8 +65,8 @@ def test_search():
                                         "is_exclusive": false,
                                         "description": "This strange looking inside out building is a museum in Paris",
                                         "images": {
-                                          "primary": "http:\/\/mydomain.com\/file_exchange\/images\/centrepompidou_red.jpg",
-                                          "secondary": "http:\/\/mydomain.com\/file_exchange\/images\/centrepompidou_ren.jpg"
+                                          "primary": "http:\/\/mydomain.com\/file_exchange\/images\/centrepompido.jpg",
+                                          "secondary": "http:\/\/mydomain.com\/file_exchange\/images\/centrepompido.jpg"
                                         },
                                         "link": "http:\/\/mydomain.com\/file_exchange\/lex_filedesc.php?lotGET=2327",
                                         "is_certified": true,
