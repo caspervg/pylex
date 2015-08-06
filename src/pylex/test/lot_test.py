@@ -180,6 +180,9 @@ def dependency_test():
     with requests_mock.Mocker() as mock:
         mock.register_uri('PUT', _base + '/lot/2/dependency-string'
                                          '?string=MjAkMzAkdGVzdEBodHRwOi8vZXhhbXBsZS5vcmc%2FZmlsZT0yMDk%3D')
+        mock.register_uri('PUT', _base + '/lot/3/dependency-string'
+                                         '?string=Tk8=')
+
         internal = [20, 30]
         external = [('test', 'http://example.org?file=209')]
         dep = _api.lot_route().set_dependencies(2, internal, external)
@@ -187,3 +190,9 @@ def dependency_test():
         ok_(dep is not None)
         eq_(dep['plain'], '20$30$test@http://example.org?file=209')
         eq_(dep['encoded'], 'MjAkMzAkdGVzdEBodHRwOi8vZXhhbXBsZS5vcmc/ZmlsZT0yMDk='.encode('ascii'))
+
+        dep = _api.lot_route().set_dependencies(3, [], [])
+
+        ok_(dep is not None)
+        eq_(dep['plain'], 'NO')
+        eq_(dep['encoded'], 'Tk8='.encode('ascii'))

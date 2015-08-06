@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='lex4py',
-    version='1.1.0',
+    version='1.1.1',
     package_dir={'': 'src'},
     packages=['pylex'],
     url='https://github.com/caspervg/pylex',

@@ -108,10 +108,12 @@ class LotRoute(Route):
         :return: Created dependency string that was sent to the server, in plaintext and base64 encoded
         :rtype: str
         """
-        deps = internal
-        for (name, link) in external:
-            deps.append("{0}@{1}".format(name, link))
-        dependency_str = '$'.join(str(x) for x in deps)
+        dependency_str = 'NO'
+        if len(internal) > 0 or len(external) > 0:
+            deps = internal
+            for (name, link) in external:
+                deps.append("{0}@{1}".format(name, link))
+            dependency_str = '$'.join(str(x) for x in deps)
 
         params = {
             'string': b64encode(dependency_str.encode('ascii'))
