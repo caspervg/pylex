@@ -1,3 +1,4 @@
+from base64 import b64encode
 import os
 import requests
 
@@ -9,7 +10,7 @@ class LotRoute(Route):
     Contains endpoints related to LEX lots
     """
 
-    def lot(self, id, user=True, dependencies=True, comments=True, votes=True):
+    def lot(self, id, user=True, dependencies=True, comments=True, votes=True, no_strip=False):
         """
         Retrieve the lot with given identifier
 
@@ -18,6 +19,7 @@ class LotRoute(Route):
         :param dependencies: Should a dependency list be returned
         :param comments: Should a list of comments be returned
         :param votes: Should a list of votes be returned
+        :param no_strip: Should XML/HTML tags be stripped in the returned lot description
         :return: Requested lot
         :rtype: dict
         """
@@ -30,6 +32,8 @@ class LotRoute(Route):
             args['comments'] = 'true'
         if votes:
             args['votes'] = 'true'
+        if no_strip:
+            args['nostrip'] = 'true'
 
         return self._get_json('lot/{0}', id, **args)
 
@@ -93,3 +97,31 @@ class LotRoute(Route):
         r = requests.post(url, auth=self._auth, params=rating)
         r.raise_for_status()
         return r.json()
+
+    def set_dependencies(self, id, internal=list(), external=list()):
+        """
+        Sets the dependency string (for the LEX Dependency Tracker) for a lot.
+        Requires administrator access.
+        :param id: Identifier of the lot
+        :param internal: List of dependency identifiers for internal files (LEX lots) that the lot depends on
+        :param external: List of (name, link) tuples for external files (STEX, TSC, ...) that the lot depends on
+        :return: Created dependency string that was sent to the server, in plaintext and base64 encoded
+        :rtype: str
+        """
+        deps = internal
+        for (name, link) in external:
+            deps.append("{0}@{1}".format(name, link))
+        dependency_str = '$'.join(str(x) for x in deps)
+
+        params = {
+            'string': b64encode(dependency_str.encode('ascii'))
+        }
+
+        url = self._base + 'lot/{0}/dependency-string'.format(id)
+        r = requests.put(url, auth=self._auth, params=params)
+        r.raise_for_status()
+
+        return {
+            'plain': dependency_str,
+            'encoded': params['string']
+        }

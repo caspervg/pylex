@@ -3,7 +3,7 @@ import requests_mock
 
 from .. import LexApi
 
-_api = LexApi(auth=('caspervg', 'lolcode'))
+_api = LexApi(auth=('test_account', 'test_pass'))
 _base = 'http://sc4devotion.com/csxlex/api/v4'
 
 def test_lot():
@@ -175,3 +175,15 @@ def rate_test():
 
         rate = _api.lot_route().rate(2)
         eq_(len(rate), 0)
+
+def dependency_test():
+    with requests_mock.Mocker() as mock:
+        mock.register_uri('PUT', _base + '/lot/2/dependency-string'
+                                         '?string=MjAkMzAkdGVzdEBodHRwOi8vZXhhbXBsZS5vcmc%2FZmlsZT0yMDk%3D')
+        internal = [20, 30]
+        external = [('test', 'http://example.org?file=209')]
+        dep = _api.lot_route().set_dependencies(2, internal, external)
+
+        ok_(dep is not None)
+        eq_(dep['plain'], '20$30$test@http://example.org?file=209')
+        eq_(dep['encoded'], 'MjAkMzAkdGVzdEBodHRwOi8vZXhhbXBsZS5vcmc/ZmlsZT0yMDk='.encode('ascii'))
