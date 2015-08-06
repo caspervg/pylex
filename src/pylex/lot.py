@@ -108,7 +108,7 @@ class LotRoute(Route):
         :return: Created dependency string that was sent to the server, in plaintext and base64 encoded
         :rtype: str
         """
-        dependency_str = 'NO'
+        dependency_str = 'NONE'
         if len(internal) > 0 or len(external) > 0:
             deps = internal
             for (name, link) in external:
