@@ -194,5 +194,5 @@ def dependency_test():
         dep = _api.lot_route().set_dependencies(3, [], [])
 
         ok_(dep is not None)
-        eq_(dep['plain'], 'NO')
-        eq_(dep['encoded'], 'Tk8='.encode('ascii'))
+        eq_(dep['plain'], 'NONE')
+        eq_(dep['encoded'], 'Tk9ORQ=='.encode('ascii'))
