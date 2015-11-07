@@ -181,7 +181,7 @@ def dependency_test():
         mock.register_uri('PUT', _base + '/lot/2/dependency-string'
                                          '?string=MjAkMzAkdGVzdEBodHRwOi8vZXhhbXBsZS5vcmc%2FZmlsZT0yMDk%3D')
         mock.register_uri('PUT', _base + '/lot/3/dependency-string'
-                                         '?string=Tk8=')
+                                         '?string=Tk9ORQ==')
 
         internal = [20, 30]
         external = [('test', 'http://example.org?file=209')]
